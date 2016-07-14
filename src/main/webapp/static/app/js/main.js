@@ -104,6 +104,20 @@ wafepaApp.controller('UserController', function($scope, $location, $routeParams,
 	
 });
 
+wafepaApp.controller('MovieController', function($scope, $http){
+	
+	$scope.getMovies = function() {
+		$http.get('http://api.themoviedb.org/3/search/movie', { params: { 'api_key': '60e43150ec941092f1ba878f50329062', 'query': $scope.query, 'year': $scope.year}})
+				.success(function(data) {
+					$scope.movies = data.results;
+				})
+				.error(function() {
+					alert('Error!');
+				});
+	};
+	
+});
+
 wafepaApp.service('activityService', function($http) {
 	
 	this.url = 'api/activities';
@@ -182,6 +196,10 @@ wafepaApp.config(['$routeProvider', function($routeProvider) {
         .when('/users/edit/:id', {
             templateUrl : '/static/app/html/partial/addEditUser.html',
             controller: 'UserController'
+        })
+        .when('/movies', {
+            templateUrl : '/static/app/html/partial/movies.html',
+            controller: 'MovieController'
         })
         .otherwise({
             redirectTo: '/'
