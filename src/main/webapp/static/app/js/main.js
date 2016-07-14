@@ -37,6 +37,7 @@ wafepaApp.controller('ActivityController', function($scope, $http, $location, $r
 					.error(function() {
 						
 					});
+			$scope.editActivity = true;
 		}
 	};
 	

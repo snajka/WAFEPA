@@ -1,8 +1,12 @@
 <h2>Activities</h2>
 
-<input type="text" ng-model="search" />
-<button ng-click="getAll()">Search</button>
-<button ng-click="search=null; getAll();">Reset</button>
+<div class="form-group">
+	<div class="col-sm-4">
+	   	<input type="text" ng-model="search" class="form-control" placeholder="Enter search parameter"/>
+	</div>
+	<button ng-click="page=0; getAll();" class="btn btn-default">Search</button>
+	<button ng-click="page=0; search=null; getAll();" class="btn btn-default">Reset</button>
+</div>
 
 <table ng-init="page=0; getAll();" class="table table-striped">
 	<thead>
@@ -27,7 +31,10 @@
 <div class="row">
 	<div class="col-md-12 text-center">
 		<span ng-hide="hideSpinner" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
-		<div ng-show="showError" class="alert alert-danger" role="alert"><b>Ooops</b>, something went wrong :)</div>
+		<div class="alert alert-danger alert-dismissible" role="alert" ng-show="showError">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<b>Ooops!</b> something went wrong :)
+		</div>
 	</div>
 </div>
 
@@ -39,4 +46,4 @@
 	</div>
 </div>
 
-<a href="/#/activities/add" class="btn btn-success">Add new activity</a>
+<a href="/#/activities/add" class="btn btn-primary">Add new activity</a>
