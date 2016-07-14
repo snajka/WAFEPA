@@ -5,6 +5,7 @@ import java.util.List;
 import jwd.wafepa.model.User;
 import jwd.wafepa.service.UserService;
 import jwd.wafepa.support.UserDTOToUser;
+import jwd.wafepa.support.UserRegistrationDTOToUser;
 import jwd.wafepa.support.UserToUserDTO;
 import jwd.wafepa.web.dto.UserDTO;
 import jwd.wafepa.web.dto.UserRegistrationDTO;
@@ -29,6 +30,9 @@ public class ApiUserController {
 
 	@Autowired
 	private UserDTOToUser toUser;
+
+	@Autowired
+	private UserRegistrationDTOToUser fromRegistrationToUser;
 
 	@Autowired
 	private UserToUserDTO toDto;
@@ -64,17 +68,14 @@ public class ApiUserController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
-	public ResponseEntity<UserDTO> add(@RequestBody UserRegistrationDTO newUser) {
-		if (newUser.getPassword() == null || newUser.getPassword().isEmpty()
-				|| !newUser.getPassword().equals(newUser.getPasswordConfirm())) {
+	public ResponseEntity<UserDTO> add(@RequestBody UserRegistrationDTO newUserDTO){
+		if(newUserDTO.getPassword()==null 
+				|| newUserDTO.getPassword().isEmpty()
+				|| !newUserDTO.getPassword().equals(newUserDTO.getPasswordConfirm())){
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		User user = new User();
-		user.setEmail(newUser.getEmail());
-		user.setPassword(newUser.getPassword());
-		user.setFirstname(newUser.getFirstname());
-		user.setLastname(newUser.getLastname());
-
+		
+		User user = fromRegistrationToUser.convert(newUserDTO);
 		User savedUser = userService.save(user);
 
 		return new ResponseEntity<>(toDto.convert(savedUser), HttpStatus.CREATED);
