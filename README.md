@@ -1,4 +1,4 @@
-.## WAFEPA
+## WAFEPA
 
 ### Web Application For Evidenting Physical Activities
 
