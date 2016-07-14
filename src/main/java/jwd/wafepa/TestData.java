@@ -30,6 +30,8 @@ public class TestData {
 		Activity activity2 = new Activity();
 		Activity activity3 = new Activity();
 		Activity activity4 = new Activity();
+		Activity activity5 = new Activity();
+		Activity activity6 = new Activity();
 		activity1.setName("Running");
 		activityService.save(activity1);
 		activity2.setName("Swimming");
@@ -38,7 +40,11 @@ public class TestData {
 		activityService.save(activity3);
 		activity4.setName("Jumping");
 		activityService.save(activity4);
-		for (int i = 1; i <= 23; i++) {
+		activity5.setName("Diving");
+		activityService.save(activity5);
+		activity6.setName("Skydiving");
+		activityService.save(activity6);
+		for (int i = 1; i <= 14; i++) {
             User user = new User();
             user.setFirstname("First name " + i);
             user.setLastname("Last name " + i);

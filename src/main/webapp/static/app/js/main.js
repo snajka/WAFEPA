@@ -1,6 +1,6 @@
 var wafepaApp = angular.module('wafepaApp', ['ngRoute']);
 
-wafepaApp.controller('ActivityController', function($scope, $http, $location, $routeParams, activityService) {
+wafepaApp.controller('ActivityController', function($scope, $location, $routeParams, activityService) {
 	
 	$scope.getAll = function() {
 		
@@ -52,7 +52,7 @@ wafepaApp.controller('ActivityController', function($scope, $http, $location, $r
 	};
 });
 
-wafepaApp.controller('UserController', function($scope, $http, $location, $routeParams, userService){
+wafepaApp.controller('UserController', function($scope, $location, $routeParams, userService){
 	
 	$scope.getAll = function() {
 		userService.getAll($scope.search, $scope.page)  // HTTP GET api/activities

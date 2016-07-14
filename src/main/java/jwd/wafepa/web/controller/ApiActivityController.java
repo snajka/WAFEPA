@@ -52,7 +52,7 @@ public class ApiActivityController {
 		totalPages = activitiesPage.getTotalPages();
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.add("total-pages", "" + totalPages);
+		httpHeaders.add("total-pages", Integer.toString(totalPages));
 
 		return new ResponseEntity<>(toDTO.convert(activities), httpHeaders, HttpStatus.OK);
 	}

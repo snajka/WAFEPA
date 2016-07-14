@@ -23,7 +23,7 @@ public class JpaUserService implements UserService {
 	@Override
 	public Page<User> findAll(int page) {
 		
-		return userRepository.findAll(new PageRequest(page, 10));
+		return userRepository.findAll(new PageRequest(page, 5));
 	}
 
 	@Override

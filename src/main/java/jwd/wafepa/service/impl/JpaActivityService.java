@@ -28,7 +28,7 @@ public class JpaActivityService
 
 	@Override
 	public Page<Activity> findAll(int page) {
-		return activityRepository.findAll(new PageRequest(page, 3));
+		return activityRepository.findAll(new PageRequest(page, 5));
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class JpaActivityService
 
 	@Override
 	public Page<Activity> findByName(int page, String name) {
-		return activityRepository.findByNameLike(new PageRequest(page, 3), "%" + name + "%");
+		return activityRepository.findByNameLike(new PageRequest(page, 5), "%" + name + "%");
 	}
 
 }

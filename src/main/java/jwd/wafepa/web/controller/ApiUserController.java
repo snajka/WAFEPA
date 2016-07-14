@@ -58,7 +58,7 @@ public class ApiUserController {
 		totalPages = usersPage.getTotalPages();
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.add("total-pages", "" + totalPages);
+		httpHeaders.add("total-pages", Integer.toString(totalPages));
 
 		return new ResponseEntity<>(toDto.convert(users), httpHeaders, HttpStatus.OK);
 	}
