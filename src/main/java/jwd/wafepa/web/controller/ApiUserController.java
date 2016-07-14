@@ -72,8 +72,8 @@ public class ApiUserController {
 		User user = new User();
 		user.setEmail(newUser.getEmail());
 		user.setPassword(newUser.getPassword());
-		user.setFirstName(newUser.getFirstname());
-		user.setLastName(newUser.getLastname());
+		user.setFirstname(newUser.getFirstname());
+		user.setLastname(newUser.getLastname());
 
 		User savedUser = userService.save(user);
 

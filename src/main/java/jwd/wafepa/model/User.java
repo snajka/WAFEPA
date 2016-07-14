@@ -29,10 +29,10 @@ public class User {
 	private String password;
 	
 	@Column(name="first_name")
-	private String firstName;
+	private String firstname;
 	
 	@Column(name="last_name")
-	private String lastName;
+	private String lastname;
 	
 	@OneToMany(mappedBy="user",cascade=CascadeType.REMOVE)
 	private List<Address> addresses = new ArrayList<>();
@@ -68,17 +68,17 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getFirstName() {
-		return firstName;
+	public String getFirstname() {
+		return firstname;
 	}
-	public void setFirstName(String firstname) {
-		this.firstName = firstname;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
-	public String getLastName() {
-		return lastName;
+	public String getLastname() {
+		return lastname;
 	}
-	public void setLastName(String lastname) {
-		this.lastName = lastname;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 	public List<Address> getAddresses() {
 		return addresses;

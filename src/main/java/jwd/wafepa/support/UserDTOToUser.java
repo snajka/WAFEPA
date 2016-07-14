@@ -28,8 +28,8 @@ public class UserDTOToUser implements Converter<UserDTO, User> {
 			}
 		}
 		user.setEmail(dto.getEmail());
-		user.setFirstName(dto.getFirstname());
-		user.setLastName(dto.getLastname());
+		user.setFirstname(dto.getFirstname());
+		user.setLastname(dto.getLastname());
 		
 		return user;
 	}

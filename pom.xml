@@ -7,7 +7,7 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.2.7.RELEASE</version>
 	</parent>
-	<artifactId>lab9-end</artifactId>
+	<artifactId>WAFEPA</artifactId>
 	<packaging>war</packaging>
 	<name>WAFEPA</name>
 	<properties>
