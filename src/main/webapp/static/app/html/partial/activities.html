@@ -1,10 +1,10 @@
-<h2>Activities</h2>
+<h2>Activities <span class="badge">{{ listLength }}</span></h2>
 
 <div class="form-group">
 	<div class="col-sm-4">
 	   	<input type="text" ng-model="search" class="form-control" placeholder="Enter search parameter"/>
 	</div>
-	<button ng-click="page=0; getAll();" class="btn btn-default">Search</button>
+	<button ng-click="page=0; getAll();" ng-disabled="!search" class="btn btn-default">Search</button>
 	<button ng-click="page=0; search=null; getAll();" class="btn btn-default">Reset</button>
 </div>
 

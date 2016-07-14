@@ -41,6 +41,7 @@ public class ApiActivityController {
 		List<Activity> activities;
 		Page<Activity> activitiesPage;
 		int totalPages = 0;
+		long listLength = 0;
 
 		if (name != null) {
 			activitiesPage = activityService.findByName(page, name);
@@ -50,9 +51,11 @@ public class ApiActivityController {
 		
 		activities = activitiesPage.getContent();
 		totalPages = activitiesPage.getTotalPages();
+		listLength = activitiesPage.getTotalElements();
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add("total-pages", Integer.toString(totalPages));
+		httpHeaders.add("list-length", Long.toString(listLength));
 
 		return new ResponseEntity<>(toDTO.convert(activities), httpHeaders, HttpStatus.OK);
 	}

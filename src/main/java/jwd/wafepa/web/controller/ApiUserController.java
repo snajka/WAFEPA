@@ -2,7 +2,6 @@ package jwd.wafepa.web.controller;
 
 import java.util.List;
 
-import jwd.wafepa.model.Activity;
 import jwd.wafepa.model.User;
 import jwd.wafepa.service.UserService;
 import jwd.wafepa.support.UserDTOToUser;
@@ -47,6 +46,7 @@ public class ApiUserController {
 		List<User> users;
 		Page<User> usersPage = userService.findAll(page);
 		int totalPages = 0;
+		long listLength = 0;
 		
 		if (name != null) {
 			usersPage = userService.findByFirstnameContainsOrLastnameContainsAllIgnoreCase(page, name);
@@ -56,9 +56,11 @@ public class ApiUserController {
 		
 		users = usersPage.getContent();
 		totalPages = usersPage.getTotalPages();
+		listLength = usersPage.getTotalElements();
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add("total-pages", Integer.toString(totalPages));
+		httpHeaders.add("list-length", Long.toString(listLength));
 
 		return new ResponseEntity<>(toDto.convert(users), httpHeaders, HttpStatus.OK);
 	}
