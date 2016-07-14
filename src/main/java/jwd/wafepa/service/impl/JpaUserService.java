@@ -36,4 +36,9 @@ public class JpaUserService implements UserService {
 		userRepository.delete(id);
 	}
 
+	@Override
+	public Page<User> findByFirstnameContainsOrLastnameContainsAllIgnoreCase(int page, String name) {
+		return userRepository.findByFirstnameContainsOrLastnameContainsAllIgnoreCase(new PageRequest(page, 5), name, name);
+	}
+
 }

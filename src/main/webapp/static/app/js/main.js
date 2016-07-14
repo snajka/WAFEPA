@@ -52,13 +52,14 @@ wafepaApp.controller('ActivityController', function($scope, $http, $location, $r
 	};
 });
 
-wafepaApp.controller('UserController', function($scope, $http, $location, $routeParams){
+wafepaApp.controller('UserController', function($scope, $http, $location, $routeParams, userService){
 	
 	$scope.getAll = function() {
-		$http.get('api/users')
-				.success(function(data) {
+		userService.getAll($scope.search, $scope.page)  // HTTP GET api/activities
+				.success(function(data, status, headers) {
 					$scope.users = data;
 					$scope.hideSpinner = true;
+					$scope.totalPages = headers('total-pages');
 				})
 				.error(function() {
 					$scope.hideSpinner = true;
@@ -67,7 +68,7 @@ wafepaApp.controller('UserController', function($scope, $http, $location, $route
 	};
 	
 	$scope.remove = function(id) {
-		$http.delete('api/users/' + id)
+		userService.remove(id)
 				.success(function() {
 					$scope.getAll();
 				})
@@ -79,36 +80,26 @@ wafepaApp.controller('UserController', function($scope, $http, $location, $route
 	$scope.init = function() {
 		$scope.user = {};
 		
-		if ($routeParams.id) {  
-			$http.get('api/users/' + $routeParams.id)
+		if ($routeParams.id) { // edit stranica
+			userService.getOne($routeParams.id)
 					.success(function(data) {
 						$scope.user = data;
 					})
 					.error(function() {
-						alert('Error!');
+						
 					});
 			$scope.editUser = true;
 		};
 	};
 	
 	$scope.save = function() {
-		if ($scope.user.id) {
-			$http.put('api/users/' + $scope.user.id, $scope.user)
-					.success(function() {
-						$location.path('/users');
-					})
-					.error(function() {
-						alert('Error!');
-					});
-		} else {
-			$http.post('api/users', $scope.user)
-					.success(function() {
-						$location.path('/users');
-					})
-					.error(function() {
-						alert('Error!');
-					});
-		}
+		userService.save($scope.user)
+				.success(function() {
+					$location.path('/users');
+				})
+				.error(function() {
+					
+				});
 	};
 	
 });
@@ -134,6 +125,31 @@ wafepaApp.service('activityService', function($http) {
 			return $http.put(this.url + '/' + activity.id, activity);
 		} else {
 			return $http.post(this.url, activity);
+		}
+	};
+});
+
+wafepaApp.service('userService', function($http) {
+	
+	this.url = 'api/users';
+	
+	this.getOne = function(id) {
+		return $http.get(this.url + '/' + id);
+	};
+	
+	this.remove = function(id) {
+		return $http.delete(this.url + '/' + id);
+	};
+	
+	this.getAll = function(name, page) {
+		return $http.get(this.url, { params: { 'name': name, 'page': page }});
+	};
+	
+	this.save = function(user) {
+		if (user.id) {
+			return $http.put(this.url + '/' + user.id, user);
+		} else {
+			return $http.post(this.url, user);
 		}
 	};
 });

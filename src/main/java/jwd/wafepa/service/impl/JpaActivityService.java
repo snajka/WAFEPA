@@ -63,11 +63,5 @@ public class JpaActivityService
 	public Page<Activity> findByName(int page, String name) {
 		return activityRepository.findByNameLike(new PageRequest(page, 3), "%" + name + "%");
 	}
-	
-	//@PostConstruct
-//	public void БилоШта(){
-//		save(new Activity("Swimming"));
-//		save(new Activity("Running"));
-//	}
 
 }

@@ -36,20 +36,20 @@ public class ApiActivityController {
 	@RequestMapping(method = RequestMethod.GET)
 	ResponseEntity<List<ActivityDTO>> getActivities(
 			@RequestParam(value = "name", required = false) String name,
-			@RequestParam(value = "page", required = false, defaultValue="0") Integer page) {
+			@RequestParam(value = "page", required = false, defaultValue="0") int page) {
 
 		List<Activity> activities;
+		Page<Activity> activitiesPage;
 		int totalPages = 0;
 
 		if (name != null) {
-			Page<Activity> activitiesPage = activityService.findByName(page, name);
-			activities = activitiesPage.getContent();
-			totalPages = activitiesPage.getTotalPages();
+			activitiesPage = activityService.findByName(page, name);
 		} else {
-			Page<Activity> activitiesPage = activityService.findAll(page);
-			activities = activitiesPage.getContent();
-			totalPages = activitiesPage.getTotalPages();
+			activitiesPage = activityService.findAll(page);
 		}
+		
+		activities = activitiesPage.getContent();
+		totalPages = activitiesPage.getTotalPages();
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add("total-pages", "" + totalPages);

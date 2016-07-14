@@ -2,6 +2,7 @@ package jwd.wafepa.web.controller;
 
 import java.util.List;
 
+import jwd.wafepa.model.Activity;
 import jwd.wafepa.model.User;
 import jwd.wafepa.service.UserService;
 import jwd.wafepa.support.UserDTOToUser;
@@ -12,6 +13,7 @@ import jwd.wafepa.web.dto.UserRegistrationDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,16 +41,26 @@ public class ApiUserController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	ResponseEntity<List<UserDTO>> getUser(
-			@RequestParam(defaultValue = "0") int page) {
+			@RequestParam(value = "name", required = false) String name,
+			@RequestParam(value = "page", defaultValue = "0") int page) {
+		
+		List<User> users;
 		Page<User> usersPage = userService.findAll(page);
-
-		if (page > usersPage.getTotalPages()) {
-			return new ResponseEntity<List<UserDTO>>(HttpStatus.NOT_FOUND);
+		int totalPages = 0;
+		
+		if (name != null) {
+			usersPage = userService.findByFirstnameContainsOrLastnameContainsAllIgnoreCase(page, name);
+		} else {
+			usersPage = userService.findAll(page);
 		}
+		
+		users = usersPage.getContent();
+		totalPages = usersPage.getTotalPages();
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("total-pages", "" + totalPages);
 
-		List<User> users = usersPage.getContent();
-
-		return new ResponseEntity<>(toDto.convert(users), HttpStatus.OK);
+		return new ResponseEntity<>(toDto.convert(users), httpHeaders, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
