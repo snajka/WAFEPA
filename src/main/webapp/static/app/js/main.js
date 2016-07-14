@@ -51,6 +51,67 @@ wafepaApp.controller('ActivityController', function($scope, $http, $location, $r
 	};
 });
 
+wafepaApp.controller('UserController', function($scope, $http, $location, $routeParams){
+	
+	$scope.getAll = function() {
+		$http.get('api/users')
+				.success(function(data) {
+					$scope.users = data;
+					$scope.hideSpinner = true;
+				})
+				.error(function() {
+					$scope.hideSpinner = true;
+					$scope.showError = true;
+				});
+	};
+	
+	$scope.remove = function(id) {
+		$http.delete('api/users/' + id)
+				.success(function() {
+					$scope.getAll();
+				})
+				.error(function() {
+					alert('Error!');
+				});
+	};
+	
+	$scope.init = function() {
+		$scope.user = {};
+		
+		if ($routeParams.id) {  
+			$http.get('api/users/' + $routeParams.id)
+					.success(function(data) {
+						$scope.user = data;
+					})
+					.error(function() {
+						alert('Error!');
+					});
+			$scope.editUser = true;
+		};
+	};
+	
+	$scope.save = function() {
+		if ($scope.user.id) {
+			$http.put('api/users/' + $scope.user.id, $scope.user)
+					.success(function() {
+						$location.path('/users');
+					})
+					.error(function() {
+						alert('Error!');
+					});
+		} else {
+			$http.post('api/users', $scope.user)
+					.success(function() {
+						$location.path('/users');
+					})
+					.error(function() {
+						alert('Error!');
+					});
+		}
+	};
+	
+});
+
 wafepaApp.service('activityService', function($http) {
 	
 	this.url = 'api/activities';
@@ -89,9 +150,21 @@ wafepaApp.config(['$routeProvider', function($routeProvider) {
             templateUrl : '/static/app/html/partial/addEditActivity.html',
             controller : 'ActivityController'
         })
-         .when('/activities/edit/:id', {
+        .when('/activities/edit/:id', {
             templateUrl : '/static/app/html/partial/addEditActivity.html',
             controller : 'ActivityController'
+        })
+        .when('/users', {
+            templateUrl : '/static/app/html/partial/users.html',
+            controller: 'UserController'
+        })
+        .when('/users/add', {
+            templateUrl : '/static/app/html/partial/addEditUser.html',
+            controller: 'UserController'
+        })
+        .when('/users/edit/:id', {
+            templateUrl : '/static/app/html/partial/addEditUser.html',
+            controller: 'UserController'
         })
         .otherwise({
             redirectTo: '/'

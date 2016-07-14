@@ -1,0 +1,54 @@
+<h2>Users</h2>
+
+<div class="form-group">
+    <div class="col-sm-4">
+    	<input type="text" ng-model="search" class="form-control" placeholder="Enter search parameter"/>
+    </div>
+	<button ng-click="page=0; getAll();" class="btn btn-default">Search</button>
+	<button ng-click="page=0; search=null; getAll();" class="btn btn-default">Clear</button>
+</div>
+
+
+<table ng-init="page=0; getAll();" class="table table-striped">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>email</th>
+			<th>First name</th>
+			<th>Last name</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="user in users">
+			<td>{{ user.id }}</td>
+			<td>{{ user.email }}</td>
+			<td>{{ user.firstname }}</td>
+			<td>{{ user.lastname }}</td>
+			<td>
+				<button class="btn btn-danger btn-xs" ng-click="remove(user.id)">Delete</button>
+				<a href="/#/users/edit/{{ user.id }}" class="btn btn-warning btn-xs">Edit</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="row">
+	<div class="col-md-12 text-center">
+		<span ng-hide="hideSpinner" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+		<div class="alert alert-danger alert-dismissible" role="alert" ng-show="showError">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<b>Ooops!</b> something went wrong :)
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12 text-right">
+		<button class="btn btn-default" ng-click="page=page-1; getAll();" ng-disabled="!page">Previous</button>
+		<span> {{ page + 1 }} / {{ totalPages }} </span>
+		<button class="btn btn-default" ng-click="page=page+1; getAll();" ng-disabled="page==totalPages-1">Next</button>
+	</div>
+</div>
+
+<a href="/#/users/add" class="btn btn-primary">Add new user</a>
