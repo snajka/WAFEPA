@@ -7,7 +7,7 @@
 	<div class="col-sm-4">
 	   	<input type="text" ng-model="year" class="form-control" placeholder="Enter year"/>
 	</div>
-	<button ng-click="page=0; getMovies();" class="btn btn-default">Search</button>
+	<button ng-click="page=0; getMovies();" ng-disabled="!query" class="btn btn-default">Search</button>
 </div>
 
 <table class="table table-striped">

@@ -104,6 +104,20 @@ wafepaApp.controller('UserController', function($scope, $location, $routeParams,
 	
 });
 
+wafepaApp.controller('CountryController', function($scope, $http){
+	
+	$scope.getAll = function() {
+		$http.get('https://restcountries.eu/rest/v1/all')
+				.success(function(data) {
+					$scope.countries = data;
+				})
+				.error(function() {
+					alert('Error!');
+				});
+	};
+	
+});
+
 wafepaApp.controller('MovieController', function($scope, $http){
 	
 	$scope.getMovies = function() {
@@ -196,6 +210,10 @@ wafepaApp.config(['$routeProvider', function($routeProvider) {
         .when('/users/edit/:id', {
             templateUrl : '/static/app/html/partial/addEditUser.html',
             controller: 'UserController'
+        })
+        .when('/countries', {
+            templateUrl : '/static/app/html/partial/countries.html',
+            controller: 'CountryController'
         })
         .when('/movies', {
             templateUrl : '/static/app/html/partial/movies.html',
