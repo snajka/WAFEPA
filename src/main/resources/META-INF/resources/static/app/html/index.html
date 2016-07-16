@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html ng-app="wafepaApp">
+<head>
+<title>WAFEPA</title>
+
+<script type="text/javascript" src="static/assets/js/angular.js"></script>
+<script type="text/javascript" src="static/assets/js/angular-route.js"></script>
+<script type="text/javascript" src="static/assets/js/jquery-1.11.0.js"></script>
+<script type="text/javascript" src="static/assets/js/bootstrap.js"></script>
+<link href="static/assets/css/bootstrap.css" rel="stylesheet" />
+
+<script type="text/javascript" src="static/app/js/main.js"></script>
+<script type="text/javascript" src="static/app/js/main.controller.activity.js"></script>
+<script type="text/javascript" src="static/app/js/main.controller.user.js"></script>
+<script type="text/javascript" src="static/app/js/main.controller.country.js"></script>
+<script type="text/javascript" src="static/app/js/main.controller.movie.js"></script>
+<script type="text/javascript" src="static/app/js/main.service.activity.js"></script>
+<script type="text/javascript" src="static/app/js/main.service.user.js"></script>
+<script type="text/javascript" src="static/app/js/main.routes.js"></script>
+<link href="static/app/css/main.css" rel="stylesheet" />
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/#/">Home</a>
+				<a class="navbar-brand" href="/#/activities">Activities</a>
+				<a class="navbar-brand" href="/#/users">Users</a>
+				<a class="navbar-brand" href="/#/countries">Countries</a>
+				<a class="navbar-brand" href="/#/movies">Movies</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="jumbotron">
+		<div class="container text-center">
+			<h1>WAFEPA</h1>
+			<p>Web Application for Evidenting Physical Activities</p>
+		</div>
+	</div>
+
+	<div class="container" ng-view></div>
+	
+	<hr>
+	<div class="container">
+		<footer>
+	        <p>&copy; 2016 WAFEPA, Inc.</p>
+	    </footer>
+	</div>
+
+</body>
+</html>

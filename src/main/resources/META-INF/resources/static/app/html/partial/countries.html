@@ -1,0 +1,23 @@
+<h2>
+	Countries
+	<span class="pull-right">
+		<button class="btn btn-default" ng-click="reverse=!reverse">Reverse</button><br/>
+	</span>
+</h2>
+
+<table ng-init="getAll()" class="table table-striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Capital</th>
+			<th>Code</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="country in countries | orderBy:'id':reverse">
+			<td>{{ country.name }}</td>
+			<td>{{ country.capital }}</td>
+			<td>{{ country.alpha3Code }}</td>
+		</tr>
+	</tbody>
+</table>
