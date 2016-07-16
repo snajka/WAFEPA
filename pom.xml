@@ -8,7 +8,7 @@
 		<version>1.2.7.RELEASE</version>
 	</parent>
 	<artifactId>WAFEPA</artifactId>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>WAFEPA</name>
 	<properties>
 		<main.basedir>${basedir}/../..</main.basedir>
@@ -47,6 +47,22 @@
 
 	</dependencies>
 	<build>
+	    <finalName>wafepa</finalName>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/webapp</directory>
+                <targetPath>${basedir}/src/main/resources/META-INF/resources</targetPath>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+            </resource>
+        </resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
