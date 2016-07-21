@@ -8,7 +8,7 @@ wafepaApp.controller('ActivityController', function($scope, $location, $routePar
 				.success(function(data, status, headers) {
 					$scope.activities = data;
 					$scope.hideSpinner = true;
-					$scope.listLength = headers('list-length');
+					$scope.totalElements = headers('total-elements');
 					$scope.totalPages = headers('total-pages');
 				})
 				.error(function() {
@@ -51,4 +51,9 @@ wafepaApp.controller('ActivityController', function($scope, $location, $routePar
 					
 				});
 	};
+	
+	$scope.currentPage = $scope.page + 1;
+	
+	$scope.itemsPerPage = 5;
+	
 });

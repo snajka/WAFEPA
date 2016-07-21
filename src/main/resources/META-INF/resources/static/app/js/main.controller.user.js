@@ -7,7 +7,7 @@ wafepaApp.controller('UserController', function($scope, $location, $routeParams,
 				.success(function(data, status, headers) {
 					$scope.users = data;
 					$scope.hideSpinner = true;
-					$scope.listLength = headers('list-length');
+					$scope.totalElements = headers('total-elements');
 					$scope.totalPages = headers('total-pages');
 				})
 				.error(function() {
@@ -50,5 +50,9 @@ wafepaApp.controller('UserController', function($scope, $location, $routeParams,
 					
 				});
 	};
+	
+	$scope.currentPage = $scope.page + 1;
+	
+	$scope.itemsPerPage = 5;
 	
 });

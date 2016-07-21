@@ -1,4 +1,4 @@
-<h2>Users <span class="badge">{{ listLength }}</span></h2>
+<h2>Users <span class="badge">{{ totalElements }}</span></h2>
 
 <div class="form-group">
     <div class="col-sm-4">
@@ -45,9 +45,7 @@
 
 <div class="row">
 	<div class="col-md-12 text-right">
-		<button class="btn btn-default" ng-click="page=page-1; getAll();" ng-disabled="!page">Previous</button>
-		<span> {{ page + 1 }} / {{ totalPages }} </span>
-		<button class="btn btn-default" ng-click="page=page+1; getAll();" ng-disabled="page==totalPages-1">Next</button>
+		<uib-pagination total-items="totalElements" items-per-page="itemsPerPage" ng-click="page=currentPage-1; getAll();" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"></uib-pagination>
 	</div>
 </div>
 

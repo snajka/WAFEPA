@@ -18,6 +18,6 @@ public interface ActivityRepository
 
 	List<Activity> findByName(String name);
 	
-	Page<Activity> findByNameLike(Pageable page, String name);
+	Page<Activity> findByNameContains(Pageable page, String name);
 	
 }

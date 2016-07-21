@@ -5,6 +5,7 @@ import java.util.List;
 import jwd.wafepa.model.Activity;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 
 public interface ActivityService {
 	/**
@@ -19,7 +20,7 @@ public interface ActivityService {
 	 *  
 	 * @return List of all existing activities.
 	 */
-	Page<Activity> findAll(int page);
+	Page<Activity> findAll(int page, int itemsPerPage, Sort.Direction direction, String property);
 	
 	/**
 	 * Persists an activity. If activity's id is null,
@@ -57,7 +58,7 @@ public interface ActivityService {
 	 * @return List of Activities who's name equals the string
 	 * given in the {@code name} parameter.
 	 */
-	Page<Activity> findByName(int page, String name);
+	Page<Activity> findByNameContains(int page, int itemsPerPage, String name);
 	
 	
 	

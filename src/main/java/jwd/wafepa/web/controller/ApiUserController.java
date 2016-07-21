@@ -12,6 +12,7 @@ import jwd.wafepa.web.dto.UserRegistrationDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,26 +42,29 @@ public class ApiUserController {
 	@RequestMapping(method = RequestMethod.GET)
 	ResponseEntity<List<UserDTO>> getUser(
 			@RequestParam(value = "name", required = false) String name,
-			@RequestParam(value = "page", defaultValue = "0") int page) {
+			@RequestParam(value = "page", defaultValue = "0") int page,
+			@RequestParam(value = "itemsPerPage", required = false, defaultValue="5") int itemsPerPage,
+			@RequestParam(value = "direction", required = false, defaultValue="ASC") String direction,
+			@RequestParam(value = "property", required = false, defaultValue="id") String property) {
 		
 		List<User> users;
-		Page<User> usersPage = userService.findAll(page);
+		Page<User> usersPage;
 		int totalPages = 0;
-		long listLength = 0;
+		long totalElements = 0;
 		
 		if (name != null) {
 			usersPage = userService.findByFirstnameContainsOrLastnameContainsAllIgnoreCase(page, name);
 		} else {
-			usersPage = userService.findAll(page);
+			usersPage = userService.findAll(page, itemsPerPage, Sort.Direction.fromString(direction), property);
 		}
 		
 		users = usersPage.getContent();
 		totalPages = usersPage.getTotalPages();
-		listLength = usersPage.getTotalElements();
+		totalElements = usersPage.getTotalElements();
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add("total-pages", Integer.toString(totalPages));
-		httpHeaders.add("list-length", Long.toString(listLength));
+		httpHeaders.add("total-elements", Long.toString(totalElements));
 
 		return new ResponseEntity<>(toDto.convert(users), httpHeaders, HttpStatus.OK);
 	}

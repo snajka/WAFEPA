@@ -11,6 +11,7 @@ import jwd.wafepa.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,8 +28,8 @@ public class JpaActivityService
 	}
 
 	@Override
-	public Page<Activity> findAll(int page) {
-		return activityRepository.findAll(new PageRequest(page, 5));
+	public Page<Activity> findAll(int page, int itemsPerPage, Sort.Direction direction, String property) {
+		return activityRepository.findAll(new PageRequest(page, itemsPerPage, direction, property));
 	}
 
 	@Override
@@ -60,8 +61,8 @@ public class JpaActivityService
 	}
 
 	@Override
-	public Page<Activity> findByName(int page, String name) {
-		return activityRepository.findByNameLike(new PageRequest(page, 5), "%" + name + "%");
+	public Page<Activity> findByNameContains(int page, int itemsPerPage, String name) {
+		return activityRepository.findByNameContains(new PageRequest(page, itemsPerPage), name);
 	}
 
 }

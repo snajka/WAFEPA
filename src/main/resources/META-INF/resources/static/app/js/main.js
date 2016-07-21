@@ -4,4 +4,5 @@ var wafepaApp = angular.module('wafepaApp', ['wafepaApp.ActivityControllers',
                                              'wafepaApp.MovieControllers',
                                              'wafepaApp.ActivityServices',
                                              'wafepaApp.UserServices',
-                                             'wafepaApp.routes']);
+                                             'wafepaApp.routes',
+                                             'ui.bootstrap']);

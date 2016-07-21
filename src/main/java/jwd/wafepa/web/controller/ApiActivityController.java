@@ -10,6 +10,7 @@ import jwd.wafepa.web.dto.ActivityDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,26 +37,29 @@ public class ApiActivityController {
 	@RequestMapping(method = RequestMethod.GET)
 	ResponseEntity<List<ActivityDTO>> getActivities(
 			@RequestParam(value = "name", required = false) String name,
-			@RequestParam(value = "page", required = false, defaultValue="0") int page) {
+			@RequestParam(value = "page", required = false, defaultValue="0") int page,
+			@RequestParam(value = "itemsPerPage", required = false, defaultValue="5") int itemsPerPage,
+			@RequestParam(value = "direction", required = false, defaultValue="ASC") String direction,
+			@RequestParam(value = "property", required = false, defaultValue="name") String property) {
 
 		List<Activity> activities;
 		Page<Activity> activitiesPage;
 		int totalPages = 0;
-		long listLength = 0;
+		long totalElements = 0;
 
 		if (name != null) {
-			activitiesPage = activityService.findByName(page, name);
+			activitiesPage = activityService.findByNameContains(page, itemsPerPage, name);
 		} else {
-			activitiesPage = activityService.findAll(page);
+			activitiesPage = activityService.findAll(page, itemsPerPage, Sort.Direction.fromString(direction), property);
 		}
 		
 		activities = activitiesPage.getContent();
 		totalPages = activitiesPage.getTotalPages();
-		listLength = activitiesPage.getTotalElements();
+		totalElements = activitiesPage.getTotalElements();
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add("total-pages", Integer.toString(totalPages));
-		httpHeaders.add("list-length", Long.toString(listLength));
+		httpHeaders.add("total-elements", Long.toString(totalElements));
 
 		return new ResponseEntity<>(toDTO.convert(activities), httpHeaders, HttpStatus.OK);
 	}
