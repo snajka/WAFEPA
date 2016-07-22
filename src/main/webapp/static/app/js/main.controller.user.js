@@ -3,7 +3,7 @@ var wafepaApp = angular.module('wafepaApp.UserControllers', []);
 wafepaApp.controller('UserController', function($scope, $location, $routeParams, userService){
 	
 	$scope.getAll = function() {
-		userService.getAll($scope.search, $scope.page)  // HTTP GET api/activities
+		userService.getAll($scope.search, $scope.page, $scope.itemsPerPage, $scope.property, $scope.direction)  // HTTP GET api/activities
 				.success(function(data, status, headers) {
 					$scope.users = data;
 					$scope.hideSpinner = true;
@@ -14,7 +14,7 @@ wafepaApp.controller('UserController', function($scope, $location, $routeParams,
 					$scope.hideSpinner = true;
 					$scope.showError = true;
 				});
-	};
+	}
 	
 	$scope.remove = function(id) {
 		userService.remove(id)
@@ -24,7 +24,7 @@ wafepaApp.controller('UserController', function($scope, $location, $routeParams,
 				.error(function() {
 					alert('Error!');
 				});
-	};
+	}
 	
 	$scope.init = function() {
 		$scope.user = {};
@@ -37,9 +37,10 @@ wafepaApp.controller('UserController', function($scope, $location, $routeParams,
 					.error(function() {
 						
 					});
+			
 			$scope.editUser = true;
 		};
-	};
+	}
 	
 	$scope.save = function() {
 		userService.save($scope.user)
@@ -49,7 +50,7 @@ wafepaApp.controller('UserController', function($scope, $location, $routeParams,
 				.error(function() {
 					
 				});
-	};
+	}
 	
 	$scope.currentPage = $scope.page + 1;
 	

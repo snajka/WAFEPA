@@ -10,6 +10,6 @@ wafepaApp.controller('CountryController', function($scope, $http){
 				.error(function() {
 					alert('Error!');
 				});
-	};
+	}
 	
 });

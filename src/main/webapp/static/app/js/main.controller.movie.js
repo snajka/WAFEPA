@@ -10,6 +10,6 @@ wafepaApp.controller('MovieController', function($scope, $http){
 				.error(function() {
 					alert('Error!');
 				});
-	};
+	}
 	
 });

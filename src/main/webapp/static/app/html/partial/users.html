@@ -12,10 +12,26 @@
 <table ng-init="page=0; getAll();" class="table table-striped">
 	<thead>
 		<tr>
-			<th>ID</th>
-			<th>email</th>
-			<th>First name</th>
-			<th>Last name</th>
+			<th>
+				ID 
+				<button class="btn btn-xs" ng-click="page=0; property='id'; direction='ASC'; getAll();"><span class="caret caret-up"></span></button>
+				<button class="btn btn-xs" ng-click="page=0; property='id'; direction='DESC'; getAll();"><span class="caret"></span></button>
+			</th>
+			<th>
+				email
+				<button class="btn btn-xs" ng-click="page=0; property='email'; direction='ASC'; getAll();"><span class="caret caret-up"></span></button>
+				<button class="btn btn-xs" ng-click="page=0; property='email'; direction='DESC'; getAll();"><span class="caret"></span></button>
+			</th>
+			<th>
+				First name 
+				<button class="btn btn-xs" ng-click="page=0; property='firstname'; direction='ASC'; getAll();"><span class="caret caret-up"></span></button>
+				<button class="btn btn-xs" ng-click="page=0; property='firstname'; direction='DESC'; getAll();"><span class="caret"></span></button>
+			</th>
+			<th>
+				Last name 
+				<button class="btn btn-xs" ng-click="page=0; property='lastname'; direction='ASC'; getAll();"><span class="caret caret-up"></span></button>
+				<button class="btn btn-xs" ng-click="page=0; property='lastname'; direction='DESC'; getAll();"><span class="caret"></span></button>
+			</th>
 			<th>Actions</th>
 		</tr>
 	</thead>

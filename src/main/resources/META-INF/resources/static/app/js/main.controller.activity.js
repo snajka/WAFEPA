@@ -4,7 +4,7 @@ wafepaApp.controller('ActivityController', function($scope, $location, $routePar
 	
 	$scope.getAll = function() {
 		
-		activityService.getAll($scope.search, $scope.page)  // HTTP GET api/activities
+		activityService.getAll($scope.search, $scope.page, $scope.itemsPerPage, $scope.property, $scope.direction)  // HTTP GET api/activities
 				.success(function(data, status, headers) {
 					$scope.activities = data;
 					$scope.hideSpinner = true;
@@ -15,7 +15,7 @@ wafepaApp.controller('ActivityController', function($scope, $location, $routePar
 					$scope.showError = true;
 					$scope.hideSpinner = true;
 				});
-	};
+	}
 	
 	$scope.remove = function(id) {
 		activityService.remove(id)
@@ -25,7 +25,7 @@ wafepaApp.controller('ActivityController', function($scope, $location, $routePar
 				.error(function() {
 					
 				});
-	};
+	}
 	
 	$scope.init = function() {
 		$scope.activity = {};
@@ -40,7 +40,7 @@ wafepaApp.controller('ActivityController', function($scope, $location, $routePar
 					});
 			$scope.editActivity = true;
 		}
-	};
+	}
 	
 	$scope.save = function() {
 		activityService.save($scope.activity)
@@ -50,7 +50,7 @@ wafepaApp.controller('ActivityController', function($scope, $location, $routePar
 				.error(function() {
 					
 				});
-	};
+	}
 	
 	$scope.currentPage = $scope.page + 1;
 	

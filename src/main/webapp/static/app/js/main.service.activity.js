@@ -6,15 +6,15 @@ wafepaApp.service('activityService', function($http) {
 	
 	this.getOne = function(id) {
 		return $http.get(this.url + '/' + id);
-	};
+	}
 	
 	this.remove = function(id) {
 		return $http.delete(this.url + '/' + id);
-	};
+	}
 	
-	this.getAll = function(name, page) {
-		return $http.get(this.url, { params: { 'name': name, 'page': page }});
-	};
+	this.getAll = function(name, page, itemsPerPage, property, direction) {
+		return $http.get(this.url, { params: { 'name': name, 'page': page, 'itemsPerPage': itemsPerPage, 'property': property, 'direction': direction }});
+	}
 	
 	this.save = function(activity) {
 		if (activity.id) {
@@ -22,5 +22,5 @@ wafepaApp.service('activityService', function($http) {
 		} else {
 			return $http.post(this.url, activity);
 		}
-	};
+	}
 });
