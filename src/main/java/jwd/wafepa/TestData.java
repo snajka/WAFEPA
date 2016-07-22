@@ -55,7 +55,7 @@ public class TestData {
             for (int j = 1; j <= 3; j++) {
                 Address address = new Address();
                 address.setNumber(j + "c/7");
-                address.setStreat("Narodnog fronta");
+                address.setStreet("Narodnog fronta");
 
                 address.setUser(user);
                 user.addAddress(address);

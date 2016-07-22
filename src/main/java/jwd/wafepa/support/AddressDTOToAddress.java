@@ -31,7 +31,7 @@ public class AddressDTOToAddress
 		}
 		
 		address.setId(dto.getId());
-		address.setStreat(dto.getStreat());
+		address.setStreet(dto.getStreet());
 		address.setNumber(dto.getNumber());
 		
 		return address;

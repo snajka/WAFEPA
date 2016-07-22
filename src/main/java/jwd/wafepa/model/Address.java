@@ -18,7 +18,7 @@ public class Address {
 	private Long id;
 	
 	@Column
-	private String streat;
+	private String street;
 	
 	@Column
 	private String number;
@@ -34,11 +34,11 @@ public class Address {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getStreat() {
-		return streat;
+	public String getStreet() {
+		return street;
 	}
-	public void setStreat(String streat) {
-		this.streat = streat;
+	public void setStreet(String street) {
+		this.street = street;
 	}
 	public String getNumber() {
 		return number;

@@ -8,7 +8,7 @@ public class AddressDTO {
 	private Long id;
 	@NotBlank(message="Street must not be empty")
 	@Size(max=30)
-	private String streat;
+	private String street;
 	private String number;
 
 	public Long getId() {
@@ -19,12 +19,12 @@ public class AddressDTO {
 		this.id = id;
 	}
 
-	public String getStreat() {
-		return streat;
+	public String getStreet() {
+		return street;
 	}
 
-	public void setStreat(String streat) {
-		this.streat = streat;
+	public void setStreet(String street) {
+		this.street = street;
 	}
 
 	public String getNumber() {

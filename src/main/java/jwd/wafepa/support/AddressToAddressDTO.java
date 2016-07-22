@@ -18,7 +18,7 @@ public class AddressToAddressDTO implements Converter<Address, AddressDTO> {
 		
 		dto.setId(address.getId());
 		dto.setNumber(address.getNumber());
-		dto.setStreat(address.getStreat());
+		dto.setStreet(address.getStreet());
 		
 		return dto;
 	}
