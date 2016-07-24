@@ -32,6 +32,8 @@ public class ActivityDTOToActivity
 		
 		activity.setId(dto.getId());
 		activity.setName(dto.getName());
+		activity.setUpdated(dto.getUpdated());
+		activity.setLikes(dto.getLikes());
 		
 		return activity;
 	}

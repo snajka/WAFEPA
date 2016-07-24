@@ -34,6 +34,7 @@ public class UserRegistrationDTOToUser implements Converter<UserRegistrationDTO,
 		user.setLastname(dto.getLastname());
 		user.setEmail(dto.getEmail());
 		user.setPassword(dto.getPassword());
+		user.setWebsite(dto.getWebsite());
 		
 		return user;
 	}

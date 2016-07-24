@@ -34,6 +34,9 @@ public class User {
 	@Column(name="last_name")
 	private String lastname;
 	
+	@Column(name="website")
+	private String website;
+	
 	@OneToMany(mappedBy="user",cascade=CascadeType.REMOVE)
 	private List<Address> addresses = new ArrayList<>();
 	
@@ -86,5 +89,12 @@ public class User {
 	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
 	}
+	public String getWebsite() {
+		return website;
+	}
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+	
 	
 }

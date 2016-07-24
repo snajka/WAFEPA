@@ -23,6 +23,8 @@ public class ActivityToActivityDTO
 		
 		dto.setId(activity.getId());
 		dto.setName(activity.getName());
+		dto.setUpdated(activity.getUpdated());
+		dto.setLikes(activity.getLikes());
 		
 		return dto;
 	}

@@ -12,8 +12,8 @@ wafepaApp.service('userService', function($http) {
 		return $http.delete(this.url + '/' + id);
 	}
 	
-	this.getAll = function(name, page, itemsPerPage, property, direction) {
-		return $http.get(this.url, { params: { 'name': name, 'page': page, 'itemsPerPage': itemsPerPage, 'property': property, 'direction': direction }});
+	this.getAll = function(name, page, itemsPerPage, property, direction, searchWeb) {
+		return $http.get(this.url, { params: { 'name': name, 'page': page, 'itemsPerPage': itemsPerPage, 'property': property, 'direction': direction, 'searchWeb': searchWeb }});
 	}
 	
 	this.save = function(user) {

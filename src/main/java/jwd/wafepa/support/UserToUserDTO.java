@@ -20,6 +20,7 @@ public class UserToUserDTO implements Converter<User, UserDTO> {
 		dto.setFirstname(user.getFirstname());
 		dto.setLastname(user.getLastname());
 		dto.setEmail(user.getEmail());
+		dto.setWebsite(user.getWebsite());
 		
 		return dto;
 	}

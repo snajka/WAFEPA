@@ -41,4 +41,9 @@ public class JpaUserService implements UserService {
 		return userRepository.findByFirstnameContainsOrLastnameContainsAllIgnoreCase(new PageRequest(page, 5), name, name);
 	}
 
+	@Override
+	public Page<User> findByEmailContainsOrWebsiteContains(int page, String name) {
+		return userRepository.findByEmailContainsOrWebsiteContains(new PageRequest(page, 5), name, name);
+	}
+
 }

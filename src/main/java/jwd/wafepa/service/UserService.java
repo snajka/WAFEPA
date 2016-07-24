@@ -15,6 +15,7 @@ public interface UserService {
 	//specijalnog razloga) koristi
 	//varijanta brisanja koja NE vraća entitet
 	void delete(Long id);
-	Page<User> findByFirstnameContainsOrLastnameContainsAllIgnoreCase(int page, String name); 
+	Page<User> findByFirstnameContainsOrLastnameContainsAllIgnoreCase(int page, String name);
+	Page<User> findByEmailContainsOrWebsiteContains(int page, String name); 
 	
 }

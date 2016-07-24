@@ -1,9 +1,9 @@
-var wafepaApp = angular.module('wafepaApp.UserControllers', []);
+var wafepaApp = angular.module('wafepaApp.UserControllers', ['ngCookies']);
 
-wafepaApp.controller('UserController', function($scope, $location, $routeParams, userService){
+wafepaApp.controller('UserController', function($scope, $location, $cookies, $routeParams, userService){
 	
 	$scope.getAll = function() {
-		userService.getAll($scope.search, $scope.page, $scope.itemsPerPage, $scope.property, $scope.direction)  // HTTP GET api/activities
+		userService.getAll($scope.search, $scope.page, $scope.itemsPerPage, $scope.property, $scope.direction, $scope.searchWeb)  // HTTP GET api/activities
 				.success(function(data, status, headers) {
 					$scope.users = data;
 					$scope.hideSpinner = true;
@@ -52,8 +52,40 @@ wafepaApp.controller('UserController', function($scope, $location, $routeParams,
 				});
 	}
 	
-	$scope.currentPage = $scope.page + 1;
+	$scope.viewUser = function(user) {
+		$scope.user = user;
+		$scope.showUser = !$scope.showUser;
+	} 
+
+	$scope.getPage = function() {
+		if (!$cookies.get('page')) {
+			$scope.page = 0;
+			$scope.currentPage = 1;
+		} else {		
+			$scope.page = parseInt($cookies.get('page'));
+			$scope.currentPage = $scope.page + 1;
+		}
+		$cookies.put('page', $scope.page);
+		return $scope.page;
+	}	
+
+//	$scope.storePage = function() {
+//		$cookies.put('page', $scope.page);
+//		$cookies.put('currentPage', $scope.currentPage);
+//	}
 	
+	$scope.changePage = function() {
+		$scope.page = $scope.currentPage - 1;
+		$cookies.put('page', $scope.page);
+		$scope.getAll();
+	}
+	
+//	$scope.setCurrentPage = function() {
+//		$scope.currentPage = parseInt($cookies.get('page')) + 1;
+//	}
+		  
+//	$scope.currentPage = parseInt($cookies.get('currentPage'));
+	  
 	$scope.itemsPerPage = 5;
 	
 });

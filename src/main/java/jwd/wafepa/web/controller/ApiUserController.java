@@ -45,15 +45,18 @@ public class ApiUserController {
 			@RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "itemsPerPage", required = false, defaultValue="5") int itemsPerPage,
 			@RequestParam(value = "direction", required = false, defaultValue="ASC") String direction,
-			@RequestParam(value = "property", required = false, defaultValue="id") String property) {
+			@RequestParam(value = "property", required = false, defaultValue="id") String property,
+			@RequestParam(value = "searchWeb", required = false, defaultValue="false") boolean searchWeb) {
 		
 		List<User> users;
 		Page<User> usersPage;
 		int totalPages = 0;
 		long totalElements = 0;
 		
-		if (name != null) {
+		if (name != null && searchWeb == false) {
 			usersPage = userService.findByFirstnameContainsOrLastnameContainsAllIgnoreCase(page, name);
+		} else if (name != null && searchWeb == true) {
+			usersPage = userService.findByEmailContainsOrWebsiteContains(page, name);
 		} else {
 			usersPage = userService.findAll(page, itemsPerPage, Sort.Direction.fromString(direction), property);
 		}

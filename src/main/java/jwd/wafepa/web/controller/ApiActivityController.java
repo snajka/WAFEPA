@@ -1,5 +1,6 @@
 package jwd.wafepa.web.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import jwd.wafepa.model.Activity;
@@ -39,14 +40,24 @@ public class ApiActivityController {
 			@RequestParam(value = "name", required = false) String name,
 			@RequestParam(value = "page", required = false, defaultValue="0") int page,
 			@RequestParam(value = "itemsPerPage", required = false, defaultValue="5") int itemsPerPage,
-			@RequestParam(value = "direction", required = false, defaultValue="ASC") String direction,
-			@RequestParam(value = "property", required = false, defaultValue="name") String property) {
+			@RequestParam(value = "direction", required = false, defaultValue="DESC") String direction,
+			@RequestParam(value = "property", required = false, defaultValue="updated") String property) {
 
 		List<Activity> activities;
 		Page<Activity> activitiesPage;
 		int totalPages = 0;
 		long totalElements = 0;
 
+		if (page == -1) {
+			if (name != null) {
+				activities = activityService.findByNameContains(name);
+			} else {
+				activities = activityService.findAll();
+			}
+			
+			return new ResponseEntity<>(toDTO.convert(activities), HttpStatus.OK);
+		}
+		
 		if (name != null) {
 			activitiesPage = activityService.findByNameContains(page, itemsPerPage, name);
 		} else {
@@ -98,6 +109,7 @@ public class ApiActivityController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 
+		activity.setUpdated(new Date());
 		Activity persisted = activityService.save(toActivity.convert(activity));
 
 		return new ResponseEntity<>(toDTO.convert(persisted), HttpStatus.OK);

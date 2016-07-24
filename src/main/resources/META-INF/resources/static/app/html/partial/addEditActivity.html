@@ -7,10 +7,17 @@
 	    	<input ng-model="activity.name" type="text" class="form-control" placeholder="Name">
 	    </div>
   	</div>
+	<div class="form-group" ng-show="editActivity">
+	    <label class="col-sm-2 control-label">Last update</label>
+	    <div class="col-sm-4">
+	    	<input ng-model="activity.updated | date:'mediumDate'" type="text" class="form-control" disabled>
+	    </div>
+  	</div>
 	
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
       		<button ng-disabled="!activity.name" ng-click="save()" type="submit" class="btn btn-default">Save</button>
-      	</div>
+      		<button ng-click="remove(activity); " ng-show="editActivity" class="btn btn-danger">Delete</button>
+		</div>
 	</div>
 </form>

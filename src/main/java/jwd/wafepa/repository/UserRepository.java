@@ -14,4 +14,6 @@ public interface UserRepository
 	Page<User> findByFirstnameContainsOrLastnameContainsAllIgnoreCase(Pageable page, 
 			String firstnamePart, String lastnamePart);
 
+	Page<User> findByEmailContainsOrWebsiteContains(Pageable page, String emailPart, String websitePart);
+
 }

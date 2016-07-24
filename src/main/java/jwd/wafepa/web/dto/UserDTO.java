@@ -6,6 +6,7 @@ public class UserDTO {
 	private String email;
 	private String firstname;
 	private String lastname;
+	private String website;
 	
 	public Long getId() {
 		return id;
@@ -30,6 +31,12 @@ public class UserDTO {
 	}
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
+	}
+	public String getWebsite() {
+		return website;
+	}
+	public void setWebsite(String website) {
+		this.website = website;
 	}
 	
 }

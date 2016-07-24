@@ -65,4 +65,14 @@ public class JpaActivityService
 		return activityRepository.findByNameContains(new PageRequest(page, itemsPerPage), name);
 	}
 
+	@Override
+	public List<Activity> findByNameContains(String name) {
+		return activityRepository.findByNameContains(name);
+	}
+
+	@Override
+	public List<Activity> findAll() {
+		return activityRepository.findAll();
+	}
+
 }

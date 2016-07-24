@@ -2,7 +2,7 @@
 
 <div class="form-group">
 	<div class="col-sm-4">
-	   	<input type="text" ng-model="search" class="form-control" placeholder="Enter search parameter"/>
+		<input type="text" ng-click="getAllActivities()" ng-model="search" uib-typeahead="activity.name for activity in allActivities | filter:$viewValue | limitTo:8" class="form-control" placeholder="Enter search parameter">
 	</div>
 	<button ng-click="page=0; getAll();" ng-disabled="!search" class="btn btn-default">Search</button>
 	<button ng-click="page=0; search=null; getAll();" class="btn btn-default">Reset</button>
@@ -12,12 +12,15 @@
 	<thead>
 		<tr>
 			<th>ID 
-				<button class="btn btn-xs" ng-click="page=0; property='id'; direction='ASC'; getAll();"><span class="caret caret-up"></span></button>
-				<button class="btn btn-xs" ng-click="page=0; property='id'; direction='DESC'; getAll();"><span class="caret"></span></button>
+<!-- 				<button class="btn btn-xs" ng-click="page=0; property='id'; direction='ASC'; getAll();"><span class="caret caret-up"></span></button>
+				<button class="btn btn-xs" ng-click="page=0; property='id'; direction='DESC'; getAll();"><span class="caret"></span></button> -->
 			</th>
 			<th>Name 
-				<button class="btn btn-xs" ng-click="page=0; property='name'; direction='ASC'; getAll();"><span class="caret caret-up"></span></button>
-				<button class="btn btn-xs" ng-click="page=0; property='name'; direction='DESC'; getAll();"><span class="caret"></span></button>
+<!-- 				<button class="btn btn-xs" ng-click="page=0; property='name'; direction='ASC'; getAll();"><span class="caret caret-up"></span></button>
+				<button class="btn btn-xs" ng-click="page=0; property='name'; direction='DESC'; getAll();"><span class="caret"></span></button> -->
+			</th>
+			<th>
+				<button class="btn btn-link" ng-click="sortLikes()">Likes</button>
 			</th>
 			<th>Actions</th>
 		</tr>
@@ -26,8 +29,18 @@
 		<tr ng-repeat="activity in activities">
 			<td>{{ activity.id }}</td>
 			<td>{{ activity.name }}</td>
+			<td>{{ activity.likes }} 
+				<button ng-click="addLike(activity)" class="btn btn-success btn-xs">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				</button>
+			</td>
 			<td>
-				<button ng-click="remove(activity.id)" class="btn btn-danger btn-xs">Delete</button>
+				<button ng-hide="confirmDelete" ng-click="confirmDelete=true" class="btn btn-danger btn-xs">Delete</span></button>
+				<span ng-show="confirmDelete">
+					Are you sure?
+					<button ng-click="remove(activity)" type="submit" class="btn btn-success btn-xs">Yes</button>
+					<button ng-click="confirmDelete=false" type="submit" class="btn btn-danger btn-xs">No</button>
+				</span>	
 				<a href="/#/activities/edit/{{ activity.id }}" class="btn btn-warning btn-xs">Edit</a>
 			</td>
 		</tr>
@@ -44,10 +57,15 @@
 	</div>
 </div>
 
+<button class="btn btn-default pull-right" ng-click="loadMore()" ng-show="page+1<totalPages">Load more</button>
+
+
+<!-- 
 <div class="row">
 	<div class="col-md-12 text-right">
 		<uib-pagination total-items="totalElements" items-per-page="itemsPerPage" ng-click="page=currentPage-1; getAll();" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;"></uib-pagination>
 	</div>
 </div>
+ -->
 
 <a href="/#/activities/add" class="btn btn-primary">Add new activity</a>

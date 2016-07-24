@@ -1,5 +1,7 @@
 package jwd.wafepa.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,6 +27,12 @@ public class Activity {
 	
 	@Column(name="admin_comment")
 	private String adminComment="test";
+	
+	@Column(name="updated")
+	private Date updated;
+	
+	@Column(name="likes")
+	private int likes=0;
 	
 
 	public Activity() {
@@ -80,6 +88,22 @@ public class Activity {
 
 	public void setAdminComment(String adminComment) {
 		this.adminComment = adminComment;
+	}
+
+	public Date getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
+
+	public int getLikes() {
+		return likes;
+	}
+
+	public void setLikes(int likes) {
+		this.likes = likes;
 	}
 	
 	

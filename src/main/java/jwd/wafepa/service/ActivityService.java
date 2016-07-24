@@ -59,6 +59,10 @@ public interface ActivityService {
 	 * given in the {@code name} parameter.
 	 */
 	Page<Activity> findByNameContains(int page, int itemsPerPage, String name);
+
+	List<Activity> findByNameContains(String name);
+
+	List<Activity> findAll();
 	
 	
 	
